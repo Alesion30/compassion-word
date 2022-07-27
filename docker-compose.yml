@@ -1,6 +1,8 @@
-version: '3'
+version: "3"
 services:
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  server:
+    build: .
+    ports:
+      - 3080:3000
+    volumes:
+      - .:/var/app
