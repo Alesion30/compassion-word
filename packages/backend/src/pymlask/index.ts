@@ -1,4 +1,5 @@
 import { PythonShell } from "python-shell";
+import { python } from "../utils/python";
 
 export type Pymlask = {
   text: string;
@@ -18,33 +19,9 @@ export type Pymlask = {
  * テキストから感情を抽出する
  * https://github.com/ikegami-yukino/pymlask
  */
-const pymlask = (text: string) => {
-  return new Promise<Pymlask>((resolve, reject) => {
-    PythonShell.run(
-      "src/pymlask/index.py",
-      {
-        mode: "json",
-        pythonPath: "python",
-        pythonOptions: [],
-        args: [text],
-      },
-      (err, results) => {
-        console.log("results", results);
-
-        if (err) {
-          reject(err);
-        }
-
-        if (results === undefined) {
-          reject("result not found");
-        }
-
-        if (results) {
-          resolve(results[0]);
-        }
-      }
-    );
-  });
+const pymlask = async (text: string) => {
+  const result = await python<any>("src/pymlask/index.py", [text]);
+  return result;
 };
 
 export default pymlask;
