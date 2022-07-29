@@ -33,6 +33,6 @@ RUN pip install mecab-python3
 
 RUN yarn workspace backend install
 
-EXPOSE 3000
+EXPOSE 5000
 
 ENTRYPOINT ["yarn", "workspace", "backend", "start"]

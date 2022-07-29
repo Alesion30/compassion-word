@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import pymlask from "./pymlask/index.js";
 
-const PORT = 3000;
+const PORT = 5000;
 const app = express();
 app.use(
   bodyParser.urlencoded({
