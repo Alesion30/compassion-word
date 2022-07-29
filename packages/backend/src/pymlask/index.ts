@@ -1,4 +1,3 @@
-import { PythonShell } from "python-shell";
 import { python } from "../utils/python";
 
 export type Pymlask = {
