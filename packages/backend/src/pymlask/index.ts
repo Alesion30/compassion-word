@@ -1,6 +1,6 @@
 import { PythonShell } from "python-shell";
 
-type Pymlask = {
+export type Pymlask = {
   text: string;
   emotion: { [key in string]: string[] } | null;
   orientation: string;
@@ -14,10 +14,14 @@ type Pymlask = {
   representative: (string | string[])[];
 };
 
-export const pymlask = (text: string) => {
+/**
+ * テキストから感情を抽出する
+ * https://github.com/ikegami-yukino/pymlask
+ */
+const pymlask = (text: string) => {
   return new Promise<Pymlask>((resolve, reject) => {
     PythonShell.run(
-      "src/pymlask.py",
+      "src/pymlask/index.py",
       {
         mode: "json",
         pythonPath: "python",
@@ -42,3 +46,5 @@ export const pymlask = (text: string) => {
     );
   });
 };
+
+export default pymlask;
