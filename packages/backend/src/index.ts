@@ -1,10 +1,12 @@
 import express, { Request, Response } from "express";
+import { pymlask } from "./pymlask.js";
 
 const PORT = 3000;
 const app = express();
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, World");
+app.get("/", async (req: Request, res: Response) => {
+  const text = await pymlask("彼のことは嫌いではない！(;´Д`)");
+  res.send(text);
 });
 
 app.listen(PORT, () => {
