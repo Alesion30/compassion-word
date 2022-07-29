@@ -15,16 +15,26 @@ app.use(bodyParser.json());
 
 app.get("/", async (req: Request, res: Response) => {
   const qtext = req.query.text;
-  if (typeof qtext === "string" && qtext !== "") {
-    try {
-      const result = await asari(qtext);
-      res.send(result);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send(err);
+  console.log(qtext);
+  if (typeof qtext !== "string" || qtext === "") {
+    return res.status(404).send("typeof qtext !== string || qtext === ''");
+  }
+
+  try {
+    const result = await asari(qtext);
+    const positive =
+      result.classes.find((v) => v.class_name === "positive")?.confidence ?? 0;
+    const negative =
+      result.classes.find((v) => v.class_name === "negative")?.confidence ?? 0;
+
+    if (positive >= negative) {
+      return res.send(qtext + "😆");
+    } else {
+      return res.send(qtext + "😢");
     }
-  } else {
-    res.status(404).send("");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
   }
 });
 

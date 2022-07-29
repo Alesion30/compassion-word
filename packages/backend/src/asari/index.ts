@@ -1,4 +1,4 @@
-import { python } from "../utils/python";
+import { python } from "../utils/python.js";
 
 type Class = "negative" | "positive";
 
@@ -16,7 +16,7 @@ export type Asari = {
  * https://github.com/Hironsan/asari
  */
 const asari = async (text: string) => {
-  const result = await python<any>("src/asari/index.py", [text]);
+  const result = await python<Asari>("src/asari/index.py", [text]);
   return result;
 };
 

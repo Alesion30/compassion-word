@@ -1,4 +1,4 @@
-import { python } from "../utils/python";
+import { python } from "../utils/python.js";
 
 export type Pymlask = {
   text: string;
